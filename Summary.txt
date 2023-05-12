@@ -1,0 +1,32 @@
+Goal: ---------------------------------------------------------------
+
+The goal of this project was to create a basic omnidirectional rover with large chassis surface area, to be used later for mount of tooling, measurement instruments, perception equipment, etc. Ultimately, the rover should be able to drive outdoors in inclement weather. While not designing for complete weather proofness, it at least should be able to return home if inclement weather were to hit.
+The RomniBot was completed in my spare time while I worked on completing my master’s degree and a slew of other academic responsibilities. In excess then were neither funds nor time; the Bot was completed primarily with what I had for hardware from projects past, and the overwhelming majority of the Bot is 3D-printed. All vehicle CAD, Arduino code and wiring were completed by myself. Electrical components like drivers, transceivers and buck converters were purchased off the shelf.
+
+Some Design Notes / Lessons Learned (non-chronological): ---------------------------------------------------------------
+
+Motors originally purchased were 12V direct drive (no gear reduction) 13,000RPM. With no current rating detailed, testing with the wheel mounted indicated lousy acceleration characteristics (too low torque) and high stall current of 3.7A. I purchased a 2nd set of 12V, 100:1, 0.61A DC motors to replace, as the Bot was not to be a speed demon upon inception.
+
+With four of these motors, and with the average current draw of the UNO being less than or equal to 100 mA, I needed a 4-cell battery (14.8V) battery that could handle about 3A (safety factor included) consistently. After spec’ing the motors and battery, I noticed that 22 AWG wires have a current limit of about 0.92A. But given that I expected this max (stall) current state to be of an instantaneous nature, I forged ahead, not wanting to spend the extra money on lower gauge wires.
+
+Dealing with solid-core wire is far easier when dealing with different terminal connections between breakout boards. The catch 22 of using solid core in tight spaces with lots of wires is their rigidity. This characteristic allows them to hold their shape, but repositioning them for access or space savings is difficult. There is a time and place for both solid core and stranded wires in hobbyist electronics.
+
+Don’t use good soldering tips when heat-setting threaded inserts.
+
+With robots that rattle, (cheap) screw terminals designed for friction-based retention are not ideal. These screws will back off and the wire may come loose, causing opening or shorting of a circuit. Latching or ring terminals are better suited.
+
+I need to greatly enhance my PCB design. Space and wiring harnessing is a killer.
+ 
+Future Considerations: ---------------------------------------------------------------
+
+To realize this ultimate goal of perception, a pivot will have to be made from the current onboard Arduino UNO brain, to a Pi4. However, for this first iteration, and given my limited time to work on the project, the Arduino sufficed.
+
+The goal of the first revision was to just get a working product. Majority of the mechanical hardware used in this build was pre-existing in my stock, and is not suitable for outdoor environments for extended periods of time. Future builds’ hardware should be spec’d (as I’ve done with the BOM) with corrosion in mind; steel should be coated with black oxide (as many of the McMasterCarr links are), stainless, or replaced with anodized aluminum. Given black oxide is cheapest (from experience), that is what will be used in future.
+
+Besides consideration for corrosion, hardware improvements are needed to improve the Bot's durability in rough terrain. For example, flat washers and nuts should be replaced with either Nord-Lock washers or nylock nuts. Mecanum wheel rollers should have brass bushings press fit in, to make the pin a wear item (rather than the pin, rim and roller each wearing). Ideally, motors would be replaced with brushless RC motors, to improve drive characteristics, and to increase shaft length for coupling to wheels. Blue or green Loctite should be used for blind threaded holes. After an hour's use, the wheels were found to have a couple angular degrees of backlash in them. The majority of this is due to clearance in hub bolts' counterbored holes (showing up due to flat washers and nuts backing off). Some contribution however comes from the gear train in the motor assembly itself. The latter issue will be countered with a small harmonic or cycloidal gearbox. Hardware must also be consolidated; there is no need to use the breadth of bolt size/style that I used. I used what I had at my disposal at the time.
+
+A transmitter PCB is currently being designed using EasyEDA, and is next on the list to complete. This is powered with a few AA batteries, with its brains being an Arduino Nano.
+
+If a motor with a d-shaft is to be used in the future, and the adapter is to remain PLA, a water-jet or laser-cut ring should be pressed into the shaft receptacle for a) better fit and tolerancing b) remove wear on bore.
+
+Currently, the code does not account for motor hysteresis. This should be looked into and accounted for (i.e. mapping of analog signal for each wheel).
